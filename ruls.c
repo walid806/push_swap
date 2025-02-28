@@ -1,21 +1,13 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-
-typedef struct sp_stack
-{
-	int i;
-	struct sp_stack *next;
-}		t_stack;
+#include "push_swap.h"
 
 
-void  sa(t_stack **a)
+void	sa(t_stack **a)
 {
 	t_stack *save;
 	save = (*a);
 	*a = (*a)->next;
 	(*a)->next = save; 
-	write(1,"sa",2);
+	write(1,"sa\n",3);
 }
 
 void sb(t_stack **b)
@@ -24,38 +16,101 @@ void sb(t_stack **b)
 	save = *b;
 	*b = (*b)->next;
 	(*b)->next = save;
-	write(1,"sb", 2);
+	write(1,"sb\n", 3);
 }
+
+void rra(t_stack **a)
+{
+	t_stack *save;
+	t_stack *tmp;
+	t_stack *last;
+
+
+	save = *a;
+	tmp = *a;
+	last = *a;
+	while(last && (last)->next)
+	{
+		last = last->next;
+	}
+	while(tmp->next != last)
+		tmp = tmp->next;
+	tmp->next = NULL;
+	*a = last;
+	(*a)->next = save;
+	write(1,"rra\n",4);
+}
+
+void rrb(t_stack **b)
+{
+        t_stack *save;
+        t_stack *tmp;
+        t_stack *last;
+
+
+        save = *b;
+        tmp = *b;
+        last = *b;
+        while(last && (last)->next)
+        {
+                last = last->next;
+        }
+        while(tmp->next != last)
+                tmp = tmp->next;
+        tmp->next = NULL;
+        *b = last;
+        (*b)->next = save;
+        write(1,"rra\n",4);
+}
+
 
 void ra(t_stack **a)
 {
+	t_stack  *tmp;
 	t_stack *save;
+	t_stack *last;
 
-	save = *a;
-
-	
+	save = (*a);
+	last = (*a);
+	(*a) = save->next; 
+	while(last && (last)->next)
+                last = last->next;
+	last->next = save;
+	save->next = NULL;
+	write(1,"ra\n",3);
 }
 
-
-int main (int argc ,char **argv)
+void rb(t_stack **b)
 {
-	struct sp_stack *head  = NULL;
-	struct sp_stack *dest = NULL;
-	head = malloc(sizeof(struct sp_stack));
-	dest = malloc(sizeof(struct sp_stack));
-	if (argc == 3)
-	{
-		head->i = atoi(argv[1]);
-		dest->i = atoi(argv[2]);
+        t_stack  *tmp;
+        t_stack *save;
+        t_stack *last;
 
-		head->next = dest;
-                dest->next = NULL;
+        save = (*b);
+        last = (*b);
+        (*b) = save->next;
+        while(last && (last)->next)
+                last = last->next;
+        last->next = save;
+        save->next = NULL;
+	write(1,"rb\n",3);
 
-		sb(&head);
-		printf("\n%d-->%d\n",head->i,head->next->i);
-		
-	}else {
-	printf("rcyvtuvu");
-	}
-	
 }
+
+
+void pb(t_stack **b, t_stack **a)
+{
+	t_stack *save;
+	t_stack *tmp;
+
+
+	save = (*a);
+	*a = (*a)->next;
+	tmp = (*b);
+	(*b) = save;
+	(*b)->next = tmp;
+	write(1,"pb\n",3);
+}
+
+
+
