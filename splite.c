@@ -1,5 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   splite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wkabil <wkabil@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/09 17:55:12 by wkabil            #+#    #+#             */
+/*   Updated: 2025/03/10 01:21:21 by wkabil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "push_swap.h"
 
 static size_t	count_words(char const *s, char c)
 {
@@ -55,7 +66,7 @@ static char	*get_words(const char *s, char c, size_t *start)
 	return (word);
 }
 
-static void	free_all(char **tab, size_t	i)
+static void	free_all(char **tab, size_t i)
 {
 	while (i > 0)
 	{
@@ -93,4 +104,3 @@ char	**ft_split(char const *s, char c)
 	tab[i] = NULL;
 	return (tab);
 }
-

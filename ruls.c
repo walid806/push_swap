@@ -1,116 +1,85 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ruls.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wkabil <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 17:48:00 by wkabil            #+#    #+#             */
+/*   Updated: 2025/03/08 17:18:01 by wkabil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "push_swap.h"
 
 void	sa(t_stack **a)
 {
-	t_stack *save;
+	t_stack	*save;
+
+	if (!a || !*a || !(*a)->next)
+		return ;
 	save = (*a);
 	*a = (*a)->next;
-	(*a)->next = save; 
-	write(1,"sa\n",3);
+	save->next = (*a)->next;
+	(*a)->next = save;
+	write(1, "sa\n", 3);
 }
 
-void sb(t_stack **b)
+void	sb(t_stack **b)
 {
-	t_stack *save;
+	t_stack	*save;
+
+	if (!b || !*b || !(*b)->next)
+		return ;
 	save = *b;
 	*b = (*b)->next;
+	save->next = (*b)->next;
 	(*b)->next = save;
-	write(1,"sb\n", 3);
+	write(1, "sb\n", 3);
 }
 
-void rra(t_stack **a)
+void	rra(t_stack **a)
 {
-	t_stack *save;
-	t_stack *tmp;
-	t_stack *last;
+	t_stack	*save;
+	t_stack	*tmp;
+	t_stack	*last;
 
-
+	if (!a || !(*a) || !(*a)->next)
+		return ;
 	save = *a;
 	tmp = *a;
 	last = *a;
-	while(last && (last)->next)
+	while (last && (last)->next)
 	{
 		last = last->next;
 	}
-	while(tmp->next != last)
+	while (tmp->next != last)
 		tmp = tmp->next;
 	tmp->next = NULL;
 	*a = last;
 	(*a)->next = save;
-	write(1,"rra\n",4);
+	write(1, "rra\n", 4);
 }
 
-void rrb(t_stack **b)
+void	rrb(t_stack **b)
 {
-        t_stack *save;
-        t_stack *tmp;
-        t_stack *last;
+	t_stack	*save;
+	t_stack	*tmp;
+	t_stack	*last;
 
-
-        save = *b;
-        tmp = *b;
-        last = *b;
-        while(last && (last)->next)
-        {
-                last = last->next;
-        }
-        while(tmp->next != last)
-                tmp = tmp->next;
-        tmp->next = NULL;
-        *b = last;
-        (*b)->next = save;
-        write(1,"rra\n",4);
+	if (!b || !(*b) || !(*b)->next)
+		return ;
+	save = *b;
+	tmp = *b;
+	last = *b;
+	while (last && (last)->next)
+	{
+		last = last->next;
+	}
+	while (tmp->next != last)
+		tmp = tmp->next;
+	tmp->next = NULL;
+	*b = last;
+	(*b)->next = save;
+	write(1, "rrb\n", 4);
 }
-
-
-void ra(t_stack **a)
-{
-	t_stack  *tmp;
-	t_stack *save;
-	t_stack *last;
-
-	save = (*a);
-	last = (*a);
-	(*a) = save->next; 
-	while(last && (last)->next)
-                last = last->next;
-	last->next = save;
-	save->next = NULL;
-	write(1,"ra\n",3);
-}
-
-void rb(t_stack **b)
-{
-        t_stack  *tmp;
-        t_stack *save;
-        t_stack *last;
-
-        save = (*b);
-        last = (*b);
-        (*b) = save->next;
-        while(last && (last)->next)
-                last = last->next;
-        last->next = save;
-        save->next = NULL;
-	write(1,"rb\n",3);
-
-}
-
-
-void pb(t_stack **b, t_stack **a)
-{
-	t_stack *save;
-	t_stack *tmp;
-
-
-	save = (*a);
-	*a = (*a)->next;
-	tmp = (*b);
-	(*b) = save;
-	(*b)->next = tmp;
-	write(1,"pb\n",3);
-}
-
-
-

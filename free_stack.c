@@ -1,50 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_node.c                                          :+:      :+:    :+:   */
+/*   free_stack.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wkabil <wkabil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/09 17:35:36 by wkabil            #+#    #+#             */
-/*   Updated: 2025/03/10 01:58:52 by wkabil           ###   ########.fr       */
+/*   Created: 2025/03/09 23:11:08 by wkabil            #+#    #+#             */
+/*   Updated: 2025/03/22 20:43:50 by wkabil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_node(int n)
-{
-	t_stack	*node;
-
-	node = malloc(sizeof(t_stack));
-	if (!node)
-		return (NULL);
-	node->i = n;
-	node->next = NULL;
-	return (node);
-}
-
-void	add_back(t_stack **list, t_stack *node)
+void	free_stack(t_stack **a, t_stack **b)
 {
 	t_stack	*save;
 
-	if (*list == NULL)
+	if (!a || !(*a))
+		return ;
+	while ((*a))
 	{
-		*list = node;
-		return ;
+		save = (*a)->next;
+		free(*a);
+		*a = save;
 	}
-	if (!node)
+	if (!b || !(*b))
 		return ;
-	save = (*list);
-	while (save->next)
-		save = save->next;
-	save->next = node;
-}
-
-void	add_node(t_stack **list, int n)
-{
-	t_stack	*node;
-
-	node = ft_node(n);
-	add_back(list, node);
+	while ((*b))
+	{
+		save = (*b)->next;
+		free(*b);
+		*b = save;
+	}
 }
